@@ -153,3 +153,35 @@
     color: var(--color-foreground);
   }
 }
+
+:root {
+  --background: oklch(0.16 0.02 250);
+  --foreground: oklch(0.97 0.01 250);
+  --muted-foreground: oklch(0.68 0.03 250);
+  --key: oklch(0.25 0.025 250);
+  --key-fn: oklch(0.3 0.05 200);
+  --key-op: oklch(0.72 0.17 55);
+  --key-eq: oklch(0.75 0.16 160);
+  --key-clr: oklch(0.6 0.2 25);
+}
+.calc-bg { background: radial-gradient(circle at 30% 20%, oklch(0.28 0.06 220), var(--background) 60%); }
+.calc-shell { background: oklch(0.2 0.02 250 / 0.85); box-shadow: 0 30px 80px -20px oklch(0 0 0 / 0.7), inset 0 1px 0 oklch(1 0 0 / 0.08); }
+.calc-screen { background: oklch(0.12 0.02 250); box-shadow: inset 0 4px 14px oklch(0 0 0 / 0.5); }
+.calc-key {
+  color: var(--foreground); background: var(--key);
+  box-shadow: 0 4px 0 oklch(0 0 0 / 0.4);
+  transition: transform .12s, box-shadow .12s, filter .2s;
+  animation: key-in .45s cubic-bezier(.3,1.6,.5,1) both;
+  position: relative; overflow: hidden;
+}
+.calc-key:hover { filter: brightness(1.25); transform: translateY(-2px); }
+.calc-key:active { transform: translateY(3px) scale(.94); box-shadow: 0 1px 0 oklch(0 0 0 / 0.4); }
+.calc-key:active::after { content: ""; position: absolute; inset: 0; background: oklch(1 0 0 / 0.25); animation: ripple .35s ease-out; border-radius: inherit; }
+.calc-fn { background: var(--key-fn); font-size: .95rem; }
+.calc-op { background: var(--key-op); color: oklch(0.15 0.02 250); }
+.calc-eq { background: var(--key-eq); color: oklch(0.15 0.02 250); }
+.calc-clr { background: var(--key-clr); }
+.calc-result { animation: pop .35s ease-out; }
+@keyframes key-in { from { opacity: 0; transform: translateY(14px) scale(.8); } }
+@keyframes ripple { from { transform: scale(0); opacity: 1; } to { transform: scale(2); opacity: 0; } }
+@keyframes pop { 0% { transform: scale(.85); opacity: .3; } 60% { transform: scale(1.06); } }
